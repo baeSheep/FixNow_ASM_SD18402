@@ -32,4 +32,5 @@ public class AdminController {
         model.addAttribute("content", "paymentManagement"); // Specify the content to include
         return "admin/templates/layout/main-layout"; // Path to main layout
     }
+    
 }

@@ -1,6 +1,5 @@
 package com.fixnow.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,14 +9,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fixnow.dao.UserDao;
 import com.fixnow.model.User;
-
-import jakarta.servlet.http.HttpSession;
+import com.fixnow.service.SessionService;
 
 @Controller
 public class LoginController {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private SessionService session; // Đảm bảo SessionService đã được inject
 
     @GetMapping("/home/login")
     public String showLogin() {
@@ -27,8 +28,7 @@ public class LoginController {
     @PostMapping("/home/login")
     public String login(Model model, 
                         @RequestParam("email") String email, 
-                        @RequestParam("password") String password, 
-                        HttpSession session) { // Thêm HttpSession vào phương thức
+                        @RequestParam("password") String password) {
         try {
             // Tìm kiếm người dùng theo email
             User user = userDao.findByEmail(email);
@@ -40,9 +40,8 @@ public class LoginController {
                 model.addAttribute("error", "Invalid password"); // Mật khẩu không đúng
                 return "loginkh/login"; // Quay lại trang login
             } else {
-                // Lưu tên và vai trò vào phiên
-                session.setAttribute("userName", user.getFirstName()); // Lưu tên
-                session.setAttribute("userRole", user.getUserType()); // Lưu vai trò
+                // Lưu đối tượng User vào session
+                session.set("user", user);
 
                 // Kiểm tra userType để điều hướng đến trang phù hợp
                 if ("admin".equals(user.getUserType())) {
@@ -54,6 +53,13 @@ public class LoginController {
         } catch (Exception e) {
             model.addAttribute("error", "An error occurred during login"); // Xử lý lỗi
         }
-        return "loginkh/login"; // Quay lại trang login
+        return "loginkh/login"; // Quay lại trang login nếu có lỗi
+    }
+
+    @GetMapping("/home/logout")
+    public String logout() {
+        // Xóa thông tin người dùng khỏi session
+        session.remove("user");
+        return "redirect:/home/login";
     }
 }

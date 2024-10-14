@@ -45,43 +45,63 @@ public class HomeController {
         
         return "index";  // Trả về trang JSP
     }
-    
     @GetMapping("/search")
-    public String searchServices(@RequestParam("query") String query, Model model, HttpServletRequest request) {
-        // Tìm tất cả dịch vụ theo tên    
-    	System.out.println("Searching for: " + query); // Logging
+    public String searchServices(@RequestParam("query") String query, Model model) {
+        // Log the search query
+        System.out.println("Search keyword: " + query);
 
-        List<Services> allServices = serviceService.searchByName(query);
-
-        List<Services> giaDungServices = serviceService.findByCategoryName("Gia Dụng").stream()
-                .filter(service -> service.getName().toLowerCase().contains(query.toLowerCase()))
-                .collect(Collectors.toList());
-
-            List<Services> dienTuServices = serviceService.findByCategoryName("Điện Tử").stream()
-                .filter(service -> service.getName().toLowerCase().contains(query.toLowerCase()))
-                .collect(Collectors.toList());
-
-            List<Services> dienLanhServices = serviceService.findByCategoryName("Điện Lạnh").stream()
-                .filter(service -> service.getName().toLowerCase().contains(query.toLowerCase()))
-                .collect(Collectors.toList());
-
-            List<Services> veSinhServices = serviceService.findByCategoryName("Vệ Sinh").stream()
-                .filter(service -> service.getName().toLowerCase().contains(query.toLowerCase()))
-                .collect(Collectors.toList());
-        // Kiểm tra nếu là AJAX request
-        if (isAjax(request)) {
-            model.addAttribute("giaDungServices", giaDungServices);
-            model.addAttribute("dienTuServices", dienTuServices);
-            model.addAttribute("dienLanhServices", dienLanhServices);
-            model.addAttribute("veSinhServices", veSinhServices);
-            return "search-results :: results"; // Trả về nội dung cho AJAX
+        // Validate the query
+        if (query == null || query.trim().isEmpty()) {
+            model.addAttribute("message", "Vui lòng nhập từ khóa tìm kiếm.");
+            return "viewindex/searchResults"; // Return search results page with a message
         }
 
+        // Search for services by keyword
+        List<Services> allServices = serviceService.searchByKeyword(query);
+        
+        // Log the number of search results
+        System.out.println("Number of search results: " + allServices.size());
+
+     // Filter services by category
+        List<Services> giaDungServices = allServices.stream()
+                .filter(service -> service.getCategory() != null && 
+                                  "Gia Dụng".equalsIgnoreCase(service.getCategory().getCategoryName()))
+                .collect(Collectors.toList());
+
+        List<Services> dienTuServices = allServices.stream()
+                .filter(service -> service.getCategory() != null && 
+                                  "Điện Tử".equalsIgnoreCase(service.getCategory().getCategoryName()))
+                .collect(Collectors.toList());
+
+        List<Services> dienLanhServices = allServices.stream()
+                .filter(service -> service.getCategory() != null && 
+                                  "Điện Lạnh".equalsIgnoreCase(service.getCategory().getCategoryName()))
+                .collect(Collectors.toList());
+
+        List<Services> veSinhServices = allServices.stream()
+                .filter(service -> service.getCategory() != null && 
+                                  "Vệ Sinh".equalsIgnoreCase(service.getCategory().getCategoryName()))
+                .collect(Collectors.toList());
+
+
+        // Check and notify if no services found
+        if (giaDungServices.isEmpty() && dienTuServices.isEmpty() && dienLanhServices.isEmpty() && veSinhServices.isEmpty()) {
+            model.addAttribute("message", "Không tìm thấy dịch vụ nào phù hợp với từ khóa '" + query + "'." );
+        }
+
+        // Update the model with search results
         model.addAttribute("giaDungServices", giaDungServices);
         model.addAttribute("dienTuServices", dienTuServices);
         model.addAttribute("dienLanhServices", dienLanhServices);
         model.addAttribute("veSinhServices", veSinhServices);
-        return "index"; // Trả về view index.jsp
+
+        System.out.println("Gia Dung Services Size: " + giaDungServices.size());
+        System.out.println("Dien Tu Services Size: " + dienTuServices.size());
+        System.out.println("Dien Lanh Services Size: " + dienLanhServices.size());
+        System.out.println("Ve Sinh Services Size: " + veSinhServices.size());
+
+        // Return the HTML content for the search results
+        return "viewindex/searchResults"; // Use the HTML code in a separate JSP file
     }
 
     @GetMapping("/loginnv")
@@ -89,11 +109,6 @@ public class HomeController {
         return "loginnv/register";
     }
 
-    @GetMapping("/logout")
-    public String logout() {
-        session.remove("user");
-        return "redirect:/home/login";
-    }
 
     // Phương thức kiểm tra yêu cầu AJAX
     private boolean isAjax(HttpServletRequest request) {

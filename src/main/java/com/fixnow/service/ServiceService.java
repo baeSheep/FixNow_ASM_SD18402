@@ -12,10 +12,15 @@ public class ServiceService {
     @Autowired
     private ServicesDao servicesDao;
 
-    public List<Services> searchByName(String name) {
-        return servicesDao.findByNameContainingIgnoreCase(name);
+    // Tìm dịch vụ theo từ khóa
+    public List<Services> searchByKeyword(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            return List.of(); // Trả về danh sách rỗng nếu không có từ khóa
+        }
+        return servicesDao.searchByKeyword(name); // Tìm kiếm theo từ khóa
     }
 
+    // Tìm dịch vụ theo danh mục
     public List<Services> findByCategoryName(String categoryName) {
         return servicesDao.findByCategoryCategoryName(categoryName);
     }

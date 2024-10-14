@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "services") // Đảm bảo rằng tên bảng trong CSDL là 'services'
+@Table(name = "services") // Tên bảng trong CSDL
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,6 +23,6 @@ public class Services {
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "CategoryID", nullable = true)
-    private Category category; // Đảm bảo Category cũng được đánh dấu là @Entity
+    @JoinColumn(name = "CategoryID", nullable = true) // Tên cột liên kết với bảng Category
+    private Category category; // Mối quan hệ với entity Category
 }

@@ -90,7 +90,7 @@
 <div class="form-section card" id="userForm">
     <div class="card-body">
         <h4 class="card-title">Quản Lý Người Dùng</h4>
-        <form action="${pageContext.request.contextPath}/users" method="post">
+        <form action="${pageContext.request.contextPath}/management/update" method="post"> <!-- Cập nhật đường dẫn -->
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -111,7 +111,7 @@
                             <option value="">Chọn vai trò</option>
                             <option value="admin">Quản trị viên</option>
                             <option value="user">Người dùng</option>
-                            <option value="provider">Nhà cung cấp dịch vụ</option> <!-- Thêm vai trò nhà cung cấp nếu cần -->
+                            <option value="provider">Nhà cung cấp dịch vụ</option>
                         </select>
                     </div>
                 </div>
@@ -143,19 +143,18 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="user" items="${users}">
+                <c:forEach var="user" items="${regularUsers}"> <!-- Sử dụng regularUsers -->
                     <tr>
                         <td>${user.firstName} ${user.lastName}</td>
                         <td>${user.email}</td>
                         <td>${user.userType}</td>
                         <td>${user.phoneNumber}</td>
                         <td>
-                            <form action="${pageContext.request.contextPath}/users/delete" method="post" style="display:inline;">
+                            <form action="${pageContext.request.contextPath}/management/delete" method="post" style="display:inline;"> <!-- Xóa người dùng -->
                                 <input type="hidden" name="id" value="${user.userID}">
                                 <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
                             </form>
-                            <button class="btn btn-warning btn-sm" 
-                                    onclick="editUser('${user.userID}', '${user.firstName}', '${user.lastName}', '${user.email}', '${user.userType}', '${user.phoneNumber}')">Sửa</button>
+                            <a href="${pageContext.request.contextPath}/management/edit/${user.userID}" class="btn btn-warning btn-sm">Chỉnh Sửa</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -164,68 +163,33 @@
     </div>
 </div>
 
-
-    <!-- Quản lý nhà cung cấp dịch vụ (Provider) -->
-<div class="form-section card" id="providerForm" style="display: none;">
+<!-- Quản lý nhà cung cấp (Provider) -->
+<div class="form-section card d-none" id="providerForm">
     <div class="card-body">
-        <h4 class="card-title">Quản Lý Nhà Cung Cấp Dịch Vụ</h4>
-        <form action="${pageContext.request.contextPath}/providers" method="post">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="providerName">Tên Nhà Cung Cấp</label>
-                        <input type="text" class="form-control" id="providerName" name="name" placeholder="Nhập tên nhà cung cấp" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="providerEmail">Email</label>
-                        <input type="email" class="form-control" id="providerEmail" name="email" placeholder="Nhập email" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="providerPhone">Số Điện Thoại</label>
-                        <input type="tel" class="form-control" id="providerPhone" name="phone" placeholder="Nhập số điện thoại" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="providerStatus">Tình Trạng</label>
-                        <select class="form-control" id="providerStatus" name="status" required>
-                            <option value="">Chọn tình trạng</option>
-                            <option value="approved">Được Duyệt</option>
-                            <option value="rejected">Bị Từ Chối</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <button type="submit" class="btn btn-primary">Cập Nhật Thông Tin</button>
-        </form>
-
-        <!-- Bảng hiển thị dữ liệu nhà cung cấp -->
+        <h4 class="card-title">Quản Lý Nhà Cung Cấp</h4>
+        <!-- Thêm form cho nhà cung cấp ở đây nếu cần -->
         <h5 class="mt-4">Danh Sách Nhà Cung Cấp</h5>
-        <table class="table table-bordered mt-2" id="providerTable">
+        <table class="table table-bordered mt-2">
             <thead>
                 <tr>
                     <th>Tên Nhà Cung Cấp</th>
                     <th>Email</th>
                     <th>Số Điện Thoại</th>
-                    <th>Tình Trạng</th>
                     <th>Hành Động</th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach var="provider" items="${providers}">
                     <tr>
-                        <td>${provider.name}</td>
+                        <td>${provider.firstName} ${provider.lastName}</td>
                         <td>${provider.email}</td>
-                        <td>${provider.phone}</td>
-                        <td>${provider.status}</td>
+                        <td>${provider.phoneNumber}</td>
                         <td>
-                            <form action="${pageContext.request.contextPath}/providers/delete" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="${provider.id}">
+                            <form action="${pageContext.request.contextPath}/management/delete" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="${provider.userID}">
                                 <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
                             </form>
-                            <button class="btn btn-warning btn-sm" 
-                                    onclick="editProvider('${provider.id}', '${provider.name}', '${provider.email}', '${provider.phone}', '${provider.status}')">Sửa</button>
+                            <a href="${pageContext.request.contextPath}/management/edit/${provider.userID}" class="btn btn-warning btn-sm">Chỉnh Sửa</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -234,29 +198,14 @@
     </div>
 </div>
 
-</div>
-
-<!-- JavaScript để hiển thị và ẩn các phần -->
+<!-- JavaScript cho chuyển đổi giữa form và table -->
 <script>
-    function showSection(sectionId) {
-        document.getElementById('userForm').style.display = 'none';
-        document.getElementById('providerForm').style.display = 'none';
-        document.getElementById(sectionId).style.display = 'block';
+    function showSection(section) {
+        document.getElementById("userForm").classList.add("d-none");
+        document.getElementById("providerForm").classList.add("d-none");
+        document.getElementById(section).classList.remove("d-none");
     }
 
-    function editUser(userId, firstName, lastName, email, userType, phoneNumber) {
-        document.getElementById('userName').value = firstName + ' ' + lastName;
-        document.getElementById('userEmail').value = email;
-        document.getElementById('userRole').value = userType;
-        document.getElementById('userPhone').value = phoneNumber;
-        // Thêm xử lý cập nhật nếu cần
-    }
-
-    function editProvider(id, name, email, phone, status) {
-        document.getElementById('providerName').value = name;
-        document.getElementById('providerEmail').value = email;
-        document.getElementById('providerPhone').value = phone;
-        document.getElementById('providerStatus').value = status;
-        // Thêm xử lý cập nhật nếu cần
-    }
+    // Hiện thị mặc định là người dùng
+    showSection('userForm');
 </script>

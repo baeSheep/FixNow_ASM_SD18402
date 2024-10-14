@@ -146,7 +146,7 @@
                     <span class="material-icons-sharp me-2">add</span>
                     <h3 class="m-0">Thêm mới</h3>
                 </a>
-                <a href="/home/login" class="d-flex align-items-center p-3">
+                <a href="/home/logout" class="d-flex align-items-center p-3">
                     <span class="material-icons-sharp me-2">logout</span>
                     <h3 class="m-0">Đăng xuất</h3>
                 </a>

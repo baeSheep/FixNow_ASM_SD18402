@@ -15,8 +15,8 @@ public class interConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(authInterceptor).addPathPatterns("/user/**") // Chặn tất cả các URL
+		registry.addInterceptor(authInterceptor).addPathPatterns("/user/**","/admin/**") // Chặn tất cả các URL
 				.excludePathPatterns("/assets/**", "/home/**", "/public/**", "/static/**"); // Không chặn các URL công
-																							// khai hoặc tài nguyên 
+			// khai hoặc tài nguyên 
 	}
-}
+} 	
