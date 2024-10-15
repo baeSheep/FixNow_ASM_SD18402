@@ -9,19 +9,25 @@ import com.fixnow.model.Services;
 @Service
 public class ServiceService {
 
-    @Autowired
-    private ServicesDao servicesDao;
 
+	@Autowired
+    private ServicesDao servicesDao;
+	
     // Tìm dịch vụ theo từ khóa
-    public List<Services> searchByKeyword(String name) {
-        if (name == null || name.trim().isEmpty()) {
+    public List<Services> searchByKeyword(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
             return List.of(); // Trả về danh sách rỗng nếu không có từ khóa
         }
-        return servicesDao.searchByKeyword(name); // Tìm kiếm theo từ khóa
+        return servicesDao.searchByKeyword(keyword); // Tìm kiếm theo từ khóa
     }
 
     // Tìm dịch vụ theo danh mục
     public List<Services> findByCategoryName(String categoryName) {
         return servicesDao.findByCategoryCategoryName(categoryName);
+    }
+
+    // Tìm dịch vụ theo tên
+    public List<Services> findByNameContainingIgnoreCase(String name) {
+        return servicesDao.findByNameContainingIgnoreCase(name);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import com.fixnow.model.Services;
 
 public interface ServicesDao extends JpaRepository<Services, Integer> {
+
     // Tìm dịch vụ theo danh mục
     List<Services> findByCategoryCategoryName(String categoryName);
 

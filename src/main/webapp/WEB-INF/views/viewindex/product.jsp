@@ -2,7 +2,6 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
 <div>
     <div class="container-xxl py-5">
         <div class="container">
@@ -39,8 +38,8 @@
                                     <div class="col-md-10">
                                         <div class="row g-2">
                                             <div class="col-md-12">
-                                                <input type="text" name="query" class="form-control border-0" placeholder="Nhập tên sản phẩm" required />
-                                            	<h4>${message}</h4>
+                                                <input type="text" name="query" class="form-control border-0" placeholder="Tìm kiếm dịch vụ..." required />
+                                                <h4 class="text-danger">${message}</h4> <!-- Display message in red color -->
                                             </div>
                                         </div>
                                     </div>
@@ -52,7 +51,7 @@
                         </div>
                     </div>
 
-                    <div id="searchResults" class="tab-content">
+					<div id="searchResults" class="tab-content">
                         <!-- Display search results for Gia Dụng -->
                         <c:if test="${not empty giaDungServices}">
                             <div id="tab-1" class="tab-pane fade show p-0 active">
@@ -96,6 +95,8 @@
                                                     <span class="text-truncate me-0">
                                                         <i class="far fa-money-bill-alt text-primary me-2"></i>${item.price} VND
                                                     </span>
+                                                                                <button class="btn btn-primary mt-3">Đặt dịch vụ</button>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -123,6 +124,8 @@
                                                     <span class="text-truncate me-0">
                                                         <i class="far fa-money-bill-alt text-primary me-2"></i>${item.price} VND
                                                     </span>
+                                                                                <button class="btn btn-primary mt-3">Đặt dịch vụ</button>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -150,6 +153,8 @@
                                                     <span class="text-truncate me-0">
                                                         <i class="far fa-money-bill-alt text-primary me-2"></i>${item.price} VND
                                                     </span>
+                                                                                <button class="btn btn-primary mt-3">Đặt dịch vụ</button>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -164,11 +169,17 @@
                         </c:if>
                     </div>
                 </div>
+	
+
+                    <div id="searchResults" class="tab-content" aria-live="polite">
+                        <p id="loadingMessage" style="display: none;">Đang tìm kiếm...</p>
+                        <!-- Dynamically loaded results here -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -176,24 +187,62 @@ $(document).ready(function() {
     // Handle form submission
     $('#searchForm').on('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
+        
+        // Get the search query value
+        var query = $('input[name="query"]').val().trim();
+
+        if (query === "") {
+            // If input is empty, clear previous search results and reset to the original category services
+            $('#searchResults').empty();  // Clear the previous search results
+            resetToCategoryServices();
+            return;
+        }
+
+        $('#loadingMessage').show(); // Show loading message
 
         $.ajax({
             url: $(this).attr('action'), // Form action URL
             type: $(this).attr('method'), // Form method (GET/POST)
             data: $(this).serialize(), // Serialize form data
             success: function(response) {
-                console.log("Response:", response); // Log the response for debugging
-                $('#searchResults').html(response);
+                if (response.trim() === "") {
+                    // If response is empty, show no results message
+                    $('#searchResults').html('<p class="text-center">Không tìm thấy dịch vụ nào theo yêu cầu của bạn.</p>');
+                } else {
+                    // Replace search results with the response
+                    $('#searchResults').html(response);
+                }
             },
-
             error: function() {
                 alert('Đã xảy ra lỗi trong quá trình tìm kiếm. Vui lòng thử lại.');
+            },
+            complete: function() {
+                $('#loadingMessage').hide(); // Hide loading message
             }
         });
     });
+
+    // Function to reset to category services
+    function resetToCategoryServices() {
+        // Show loading message
+        $('#loadingMessage').show();
+
+        // Send AJAX request to load original category services
+        $.ajax({
+            url: '/home', // Adjust this URL to point to your home or category services URL
+            type: 'GET',
+            success: function(response) {
+                $('#searchResults').html(response); // Load the category services again
+            },
+            error: function() {
+                alert('Đã xảy ra lỗi trong quá trình tải lại dịch vụ. Vui lòng thử lại.');
+            },
+            complete: function() {
+                $('#loadingMessage').hide(); // Hide loading message
+            }
+        });
+    }
 });
+
+
 </script>
-
-
-
-
