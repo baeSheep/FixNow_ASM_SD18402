@@ -1,0 +1,9 @@
+@charset "UTF-8";
+/* CSS for styling the forms */
+.form-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px; /* Border radius for rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for subtle depth */
+    margin-bottom: 20px;
+}
