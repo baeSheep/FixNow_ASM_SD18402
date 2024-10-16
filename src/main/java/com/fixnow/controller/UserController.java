@@ -1,7 +1,10 @@
 package com.fixnow.controller;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.io.IOException;
+=======
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 import java.security.Principal;
 import java.util.List;
 
@@ -13,16 +16,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+<<<<<<< HEAD
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+=======
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 
 import com.fixnow.dao.UserDao;
 import com.fixnow.model.User;
 import com.fixnow.service.SessionService;
 
+<<<<<<< HEAD
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 
+=======
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 @Controller
 @RequestMapping("user")
 public class UserController {
@@ -36,7 +45,14 @@ public class UserController {
 		return"loginkh/index";
 	}
 	
+<<<<<<< HEAD
 	
+=======
+	@GetMapping("cart")
+	public String showCart() {
+		return "loginkh/dichvu/cart";
+	}
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 	@GetMapping("pay")
 	public String showPaymentForm(Model model) {
 	    // Lấy thông tin người dùng từ SessionService
@@ -61,6 +77,7 @@ public class UserController {
 	
 	}
 
+<<<<<<< HEAD
 	@PostMapping("/updateUserInfo")
     public String updateUserInfo(
             @RequestParam("first_name") String firstName,
@@ -127,5 +144,7 @@ public class UserController {
     }
 
 
+=======
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 
 }

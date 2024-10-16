@@ -1,7 +1,10 @@
 package com.fixnow.controller;
 
+<<<<<<< HEAD
 import java.util.List;
 
+=======
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fixnow.dao.UserDao;
+<<<<<<< HEAD
 import com.fixnow.model.Services;
+=======
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 import com.fixnow.model.User;
 import com.fixnow.service.SessionService;
 
@@ -27,7 +33,11 @@ public class LoginController {
     public String showLogin() {
         return "loginkh/login"; // Trả về trang JSP login
     }
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
     @PostMapping("/home/login")
     public String login(Model model, 
                         @RequestParam("email") String email, 

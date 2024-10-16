@@ -17,7 +17,10 @@ public interface ServicesDao extends JpaRepository<Services, Integer> {
     // Tìm dịch vụ theo từ khóa
     @Query("SELECT s FROM Services s WHERE LOWER(s.name) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Services> searchByKeyword(@Param("keyword") String keyword);
+<<<<<<< HEAD
     
    
 
+=======
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 }

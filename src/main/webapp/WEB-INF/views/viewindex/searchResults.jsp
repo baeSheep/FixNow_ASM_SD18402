@@ -42,6 +42,7 @@
                             <span class="text-truncate me-0">
                                 <i class="far fa-money-bill-alt text-primary me-2"></i>${item.price} VND
                             </span>
+<<<<<<< HEAD
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
@@ -49,6 +50,11 @@
                                             <a class="btn btn-primary" href="">Đặt Dịch Vụ</a>
                                         </div>
                                     </div>
+=======
+                            <button class="btn btn-primary mt-3">Đặt dịch vụ</button>
+                        </div>
+                    </div>
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
                 </div>
             </div>
         </c:forEach>
@@ -68,6 +74,7 @@
                             <span class="text-truncate me-0">
                                 <i class="far fa-money-bill-alt text-primary me-2"></i>${item.price} VND
                             </span>
+<<<<<<< HEAD
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
@@ -75,6 +82,11 @@
                                             <a class="btn btn-primary" href="">Đặt Dịch Vụ</a>
                                         </div>
                                     </div>
+=======
+                            <button class="btn btn-primary mt-3">Đặt dịch vụ</button>
+                        </div>
+                    </div>
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
                 </div>
             </div>
         </c:forEach>
@@ -94,6 +106,7 @@
                             <span class="text-truncate me-0">
                                 <i class="far fa-money-bill-alt text-primary me-2"></i>${item.price} VND
                             </span>
+<<<<<<< HEAD
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
@@ -101,6 +114,11 @@
                                             <a class="btn btn-primary" href="">Đặt Dịch Vụ</a>
                                         </div>
                                     </div>
+=======
+                            <button class="btn btn-primary mt-3">Đặt dịch vụ</button>
+                        </div>
+                    </div>
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
                 </div>
             </div>
         </c:forEach>

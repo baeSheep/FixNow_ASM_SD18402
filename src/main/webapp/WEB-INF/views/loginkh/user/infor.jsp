@@ -181,6 +181,7 @@ input[type="text"]:focus, input[type="number"]:focus, input[type="email"]:focus,
 
 </head>
 <body>
+<<<<<<< HEAD
     <jsp:include page="/WEB-INF/views/viewdn/navbar.jsp" />
     <div class="form-container">
         <div class="form-fields">
@@ -270,6 +271,85 @@ input[type="text"]:focus, input[type="number"]:focus, input[type="email"]:focus,
     </script>
 </body>
 
+=======
+	<jsp:include page="/WEB-INF/views/viewdn/navbar.jsp" />
+	<div class="form-container">
+		<!-- Phần thông tin người dùng -->
+		<div class="form-fields">
+			<h1 class="form-title">Cập Nhật Thông Tin Người Dùng</h1>
+			<form action="${pageContext.request.contextPath}/updateUserInfo"
+				method="POST">
+				<div class="image-container">
+					<div class="image-preview" id="imagePreview"
+						onclick="document.getElementById('imageUpload').click();">
+						<c:choose>
+							<c:when test="${user.image != null}">
+								<img
+									src="${pageContext.request.contextPath}/uploads/${user.image}"
+									alt="No Image">
+							</c:when>
+							<c:otherwise>
+
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<!-- Ẩn input file và kích hoạt nó khi nhấp vào khung ảnh -->
+					<input type="file" id="imageUpload" accept="image/*"
+						onchange="previewImage(event)" style="display: none;">
+				</div>
+
+				<div class="mb-3">
+					<label for="first_name" class="form-label">Tên</label> <input
+						type="text" class="form-control" id="first_name" name="first_name"
+						value="${user.firstName}" placeholder="Nhập tên">
+				</div>
+				<div class="mb-3">
+					<label for="last_name" class="form-label">Họ</label> <input
+						type="text" class="form-control" id="last_name" name="last_name"
+						value="${user.lastName}" placeholder="Nhập họ">
+				</div>
+				<div class="mb-3">
+					<label for="gender" class="form-label">Giới tính</label><br> <input
+						type="radio" id="male" name="gender" value="male"
+						${user.gender == 'male' ? 'checked' : ''}> <label
+						for="male">Nam</label> <input type="radio" id="female"
+						name="gender" value="female"
+						${user.gender == 'female' ? 'checked' : ''}
+						style="margin-left: 20px;"> <label for="female">Nữ</label>
+				</div>
+				<div class="mb-3">
+					<label for="address" class="form-label">Địa chỉ</label> <input
+						type="text" class="form-control" id="address" name="address"
+						value="${user.address}" placeholder="Nhập địa chỉ">
+				</div>
+				<div class="mb-3">
+					<label for="phone_number" class="form-label">Số điện thoại</label>
+					<input type="number" class="form-control" id="phone_number"
+						name="phone_number" value="${user.phoneNumber}"
+						placeholder="Nhập số điện thoại">
+				</div>
+				<div class="mb-3">
+					<label for="email" class="form-label">Địa chỉ email</label> <input
+						type="email" class="form-control" id="email" name="email"
+						value="${user.email}" placeholder="Nhập địa chỉ email">
+				</div>
+				<div class="mb-3">
+					<label for="password" class="form-label">Mật khẩu</label> <input
+						type="password" class="form-control" id="password" name="password"
+						placeholder="Nhập mật khẩu">
+				</div>
+				<div class="d-grid">
+					<button type="submit" class="btn-submit">Cập Nhật</button>
+				</div>
+				<div class="d-grid">
+					<button type="button" class="btn" onclick="window.history.back();">Quay
+						Lại</button>
+				</div>
+				<!-- Phần cập nhật hình ảnh -->
+
+			</form>
+		</div>
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 
 
 

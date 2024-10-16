@@ -5,9 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+=======
+import java.util.Date;
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 
 @Entity
 @Table(name = "Payments")
@@ -46,6 +50,7 @@ public class Payment {
 
     @Column(name = "Amount", nullable = false)
     private double amount; // Số tiền thanh toán
+<<<<<<< HEAD
     public void generatePaymentID() {
         // Lấy ngày hiện tại theo định dạng ddMMyyyy
         String datePart = new SimpleDateFormat("ddMMyy").format(new Date());
@@ -58,4 +63,6 @@ public class Payment {
         this.paymentID = "PAY" + datePart + randomNumberStr;
     }
 
+=======
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 }

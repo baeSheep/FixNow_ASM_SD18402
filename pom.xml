@@ -93,6 +93,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+<<<<<<< HEAD
 			<dependency>
 			<groupId>jakarta.servlet.jsp.jstl</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
@@ -101,6 +102,10 @@
 	</dependencies>
 
 
+=======
+	</dependencies>
+
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 	<build>
 		<plugins>
 			<plugin>

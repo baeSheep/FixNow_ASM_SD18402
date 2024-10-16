@@ -44,13 +44,23 @@ public class Booking {
 
     // Hàm tạo ID booking
     public void generateBookingID() {
+<<<<<<< HEAD
         // Lấy ngày hiện tại theo định dạng ddMMyyyy
         String datePart = new SimpleDateFormat("ddMMyy").format(new Date());
 
+=======
+        // Lấy ngày hiện tại
+        String datePart = new SimpleDateFormat("ddMMyy").format(new Date());
+
+        // Lấy chữ cái ngẫu nhiên từ a-z
+        char randomLetter = (char) ('a' + new Random().nextInt(26));
+
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
         // Tạo số ngẫu nhiên 3 chữ số
         int randomNumber = new Random().nextInt(1000); // Từ 0 đến 999
         String randomNumberStr = String.format("%03d", randomNumber); // Đảm bảo có 3 chữ số
 
+<<<<<<< HEAD
         // Ghép lại thành paymentID
         this.bookingID = "BOK" + datePart + randomNumberStr;
     }
@@ -62,4 +72,9 @@ public class Booking {
                 '}';
     }
 
+=======
+        // Ghép lại thành bookingID
+        this.bookingID = randomLetter + datePart + randomNumberStr;
+    }
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 }

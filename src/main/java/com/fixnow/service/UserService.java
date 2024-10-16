@@ -28,7 +28,10 @@ public class UserService {
     public User getUserById(Integer id) {
         return dao.findById(id).orElse(null);
     }
+<<<<<<< HEAD
     public User findByEmail(String username) {
         return dao.findByEmail(username); // Tìm người dùng dựa trên tên người dùng
     }
+=======
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 }

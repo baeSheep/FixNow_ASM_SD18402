@@ -32,6 +32,7 @@ public class User {
 
     @OneToMany(mappedBy = "provider")
     private List<Booking> providedServices;
+<<<<<<< HEAD
     @Override
     public String toString() {
         return "User{" +
@@ -41,4 +42,6 @@ public class User {
                 // Không gọi Booking ở đây nếu có quan hệ
                 '}';
     }
+=======
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 }

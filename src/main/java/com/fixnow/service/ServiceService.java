@@ -12,9 +12,13 @@ public class ServiceService {
 
 	@Autowired
     private ServicesDao servicesDao;
+<<<<<<< HEAD
 	   public Services getServiceById(Integer serviceId) {
 	        return servicesDao.findById(serviceId).orElse(null); // Trả về null nếu không tìm thấy
 	    }
+=======
+	
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
     // Tìm dịch vụ theo từ khóa
     public List<Services> searchByKeyword(String keyword) {
         if (keyword == null || keyword.trim().isEmpty()) {
@@ -32,8 +36,11 @@ public class ServiceService {
     public List<Services> findByNameContainingIgnoreCase(String name) {
         return servicesDao.findByNameContainingIgnoreCase(name);
     }
+<<<<<<< HEAD
     public Services findById(Integer serviceId) {
         return servicesDao.findById(serviceId).orElse(null);
     }
     
+=======
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
 }

@@ -1,7 +1,11 @@
 		<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	
 	<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+<<<<<<< HEAD
     <a href="/home/index" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+=======
+    <a href="fixnow" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
         <h1 class="m-0 text-primary">FixNow</h1>
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -19,7 +23,11 @@
                 <a href="404.html" class="dropdown-item">404</a>
             </div>
         </div>
+<<<<<<< HEAD
         <a href="/home/index" class="nav-item nav-link">Liên Hệ</a>
+=======
+        <a href="contact.html" class="nav-item nav-link">Liên Hệ</a>
+>>>>>>> c9e849bca84ac2aac8dcb2fcdc04ff5cd7322be3
     </div>
     <a href="/user/infor" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block text-white" style="display: flex; align-items: center; justify-content: center;">
         Thông Tin Cá Nhân
